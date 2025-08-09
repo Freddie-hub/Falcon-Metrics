@@ -43,7 +43,7 @@ const pillars = [
 export default function ServicesSection() {
   return (
     <section className="relative mx-auto mt-24 w-[92%]">
-      <div className="mb-8 flex items-baseline justify-between">
+      <div className="mb-8 flex flex-col gap-3 md:flex-row md:items-baseline md:justify-between">
         <Reveal direction="left">
           <h2 className="text-2xl font-bold text-white md:text-3xl">Services</h2>
         </Reveal>
@@ -56,9 +56,15 @@ export default function ServicesSection() {
 
       <div className="grid gap-5 md:grid-cols-3">
         {pillars.map((p, i) => (
-          <Reveal key={p.title} delay={i * 80} direction={i % 3 === 0 ? "left" : i % 3 === 1 ? "up" : "right"}>
+          <Reveal
+            key={p.title}
+            delay={i * 80}
+            direction={i % 3 === 0 ? "left" : i % 3 === 1 ? "up" : "right"}
+          >
             <div className="relative overflow-hidden rounded-2xl border border-white/10 bg-white/5 p-5 backdrop-blur-xl">
-              <div className={`pointer-events-none absolute -inset-8 -z-10 rotate-12 bg-gradient-to-br ${p.accent}`} />
+              <div
+                className={`pointer-events-none absolute -inset-8 -z-10 rotate-12 bg-gradient-to-br ${p.accent}`}
+              />
               <div className="mb-3 inline-flex size-10 items-center justify-center rounded-lg bg-white/10">
                 <p.icon className="size-5 text-white" />
               </div>

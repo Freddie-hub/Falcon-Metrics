@@ -70,12 +70,15 @@ export default function Navbar({
         )}
 
         {/* Mobile Slide Menu */}
-        <div className={`fixed right-0 top-0 z-50 h-full w-80 max-w-[85vw] transform bg-black/90 backdrop-blur-xl transition-transform duration-300 ease-in-out md:hidden ${
-          open ? 'translate-x-0' : 'translate-x-full'
-        }`}>
+        <div
+          className={`fixed right-0 top-0 z-50 h-full w-80 max-w-[85vw] transform !bg-sidebar shadow-xl transition-transform duration-300 ease-in-out md:hidden ${
+            open ? 'translate-x-0' : 'translate-x-full'
+          }`}
+          style={{ backgroundColor: 'oklch(0.1 0 0)' }} // true solid fallback
+        >
           <div className="flex h-full flex-col">
             {/* Header */}
-            <div className="flex items-center justify-between border-b border-white/10 p-6">
+            <div className="flex items-center justify-between border-b border-white/10 p-6 bg-sidebar">
               <span className="text-lg font-semibold text-white">{brand}</span>
               <Button
                 variant="ghost"
@@ -90,34 +93,10 @@ export default function Navbar({
             {/* Navigation Links */}
             <nav className="flex-1 p-6">
               <div className="space-y-4">
-                <Link 
-                  className="block rounded-lg px-4 py-3 text-lg text-white/90 hover:bg-white/10 transition-colors" 
-                  href="/"
-                  onClick={() => setOpen(false)}
-                >
-                  Home
-                </Link>
-                <Link 
-                  className="block rounded-lg px-4 py-3 text-lg text-white/90 hover:bg-white/10 transition-colors" 
-                  href="/about"
-                  onClick={() => setOpen(false)}
-                >
-                  About
-                </Link>
-                <Link 
-                  className="block rounded-lg px-4 py-3 text-lg text-white/90 hover:bg-white/10 transition-colors" 
-                  href="/services"
-                  onClick={() => setOpen(false)}
-                >
-                  Services
-                </Link>
-                <Link 
-                  className="block rounded-lg px-4 py-3 text-lg text-white/90 hover:bg-white/10 transition-colors" 
-                  href="/contact"
-                  onClick={() => setOpen(false)}
-                >
-                  Contact
-                </Link>
+                <MobileLink href="/" label="Home" setOpen={setOpen} />
+                <MobileLink href="/about" label="About" setOpen={setOpen} />
+                <MobileLink href="/services" label="Services" setOpen={setOpen} />
+                <MobileLink href="/contact" label="Contact" setOpen={setOpen} />
               </div>
             </nav>
 
@@ -155,6 +134,26 @@ function NavLink({ href, label }: { href: string; label: string }) {
     >
       <span>{label}</span>
       <span className="absolute -bottom-1 left-0 h-[2px] w-0 bg-gradient-to-r from-emerald-400 to-fuchsia-500 transition-all group-hover:w-full" />
+    </Link>
+  )
+}
+
+function MobileLink({
+  href,
+  label,
+  setOpen
+}: {
+  href: string
+  label: string
+  setOpen: (open: boolean) => void
+}) {
+  return (
+    <Link 
+      className="block rounded-lg px-4 py-3 text-lg text-white/90 hover:bg-white/10 transition-colors" 
+      href={href}
+      onClick={() => setOpen(false)}
+    >
+      {label}
     </Link>
   )
 }
