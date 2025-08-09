@@ -42,20 +42,14 @@ export default function Navbar({
             <NavLink href="/" label="Home" />
             <NavLink href="/about" label="About" />
             <NavLink href="/services" label="Services" />
-            <NavLink href="/projects" label="Projects" />
             <NavLink href="/contact" label="Contact" />
-            <Link href="/login" className="text-sm text-white/70 hover:text-white">
-              Login
-            </Link>
             <Button asChild className="bg-blue-600 text-white hover:bg-blue-700">
-              <Link href="/signup">Start a Project</Link>
+              <Link href="/contact">Book Demo</Link>
             </Button>
-            <ThemeToggle />
           </div>
 
           {/* Mobile Navigation Toggle */}
-          <div className="flex items-center gap-2 md:hidden">
-            <ThemeToggle />
+          <div className="flex items-center md:hidden">
             <Button
               variant="ghost"
               size="icon"
@@ -119,13 +113,6 @@ export default function Navbar({
                 </Link>
                 <Link 
                   className="block rounded-lg px-4 py-3 text-lg text-white/90 hover:bg-white/10 transition-colors" 
-                  href="/projects"
-                  onClick={() => setOpen(false)}
-                >
-                  Projects
-                </Link>
-                <Link 
-                  className="block rounded-lg px-4 py-3 text-lg text-white/90 hover:bg-white/10 transition-colors" 
                   href="/contact"
                   onClick={() => setOpen(false)}
                 >
@@ -142,14 +129,14 @@ export default function Navbar({
                   href="/login"
                   onClick={() => setOpen(false)}
                 >
-                  Login
+                  Book demo
                 </Link>
                 <Button 
                   asChild 
                   className="w-full bg-blue-600 text-white hover:bg-blue-700"
                   onClick={() => setOpen(false)}
                 >
-                  <Link href="/signup">Start a Project</Link>
+                  <Link href="/signup">Book demo</Link>
                 </Button>
               </div>
             </div>

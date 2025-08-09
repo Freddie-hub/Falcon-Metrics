@@ -19,20 +19,19 @@ export default function Hero() {
         <div className="grid items-end gap-10 md:grid-cols-[1.2fr_.8fr]">
           <div className="relative">
             <div className="inline-block -rotate-1 rounded-full border border-white/15 bg-white/10 px-4 py-1 text-[11px] uppercase tracking-[0.2em] text-white/80 backdrop-blur">
-              We are the AI backbone for every business
+              AI is everybody's business
             </div>
             <h1 className="mt-5 text-4xl font-extrabold tracking-tight text-white md:text-6xl">
               Adaptable, intelligent AI systems for every industry.
             </h1>
             <p className="mt-5 max-w-2xl text-sm leading-7 text-white/70 md:text-base">
-              We build modular AI—strategy to integration—so healthcare, finance, logistics, education, legal,
-              manufacturing and beyond can work smarter, faster, and with greater impact.
+              We help organizations and businesses build and integrate AI—from strategy to deployment so industries like healthcare, finance, logistics, education, and manufacturing can work smarter, faster, and with greater impact.
             </p>
 
             <div className="mt-8 flex flex-wrap items-center gap-3">
               <Button
                 asChild
-                className="group relative overflow-hidden bg-gradient-to-r from-emerald-500 to-fuchsia-500 text-black transition-transform hover:scale-[1.02]"
+                className="group relative overflow-hidden bg-blue-600 text-white transition-transform hover:scale-[1.02] hover:bg-blue-700"
               >
                 <Link href="/contact">
                   <span className="relative z-10">Get a Quote</span>
@@ -52,7 +51,7 @@ export default function Hero() {
               <h3 className="text-sm font-semibold uppercase tracking-wider text-white/80">Vision</h3>
               <p className="mt-2 text-lg font-medium text-white">
                 {
-                  "We build adaptable, intelligent AI systems that empower every organization—across every industry—to work smarter, faster, and with greater impact."
+                  "We build adaptable, intelligent AI systems that empower every organization across every industry to work smarter, faster, and with greater impact."
                 }
               </p>
             </div>

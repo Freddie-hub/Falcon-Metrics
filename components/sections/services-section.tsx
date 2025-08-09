@@ -45,7 +45,7 @@ export default function ServicesSection() {
     <section className="relative mx-auto mt-24 w-[92%]">
       <div className="mb-8 flex items-baseline justify-between">
         <Reveal direction="left">
-          <h2 className="text-2xl font-bold text-white md:text-3xl">Modular Services</h2>
+          <h2 className="text-2xl font-bold text-white md:text-3xl">Services</h2>
         </Reveal>
         <Reveal delay={100}>
           <p className="max-w-xl text-sm text-white/70">

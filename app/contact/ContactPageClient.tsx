@@ -1,14 +1,10 @@
 "use client"
 
 import type React from "react"
-
 import Navbar from "@/components/navbar"
 import Footer from "@/components/footer"
-import { submitContact } from "./actions"
 import { useState } from "react"
 import { Button } from "@/components/ui/button"
-import { Mail, MessageSquare } from "lucide-react"
-import Link from "next/link"
 
 export default function ContactPageClient() {
   const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle")
@@ -18,14 +14,27 @@ export default function ContactPageClient() {
     e.preventDefault()
     setStatus("loading")
     setError(null)
-    const form = e.currentTarget
-    const res = await submitContact(new FormData(form))
-    if (res.ok) {
-      setStatus("success")
-      form.reset()
-    } else {
+
+    const formData = new FormData(e.currentTarget)
+    formData.append("access_key", "a83017ae-d6ad-4470-88fa-8e1b37b5a4d3")
+
+    try {
+      const res = await fetch("https://api.web3forms.com/submit", {
+        method: "POST",
+        body: formData
+      })
+      const data = await res.json()
+
+      if (data.success) {
+        setStatus("success")
+        e.currentTarget.reset()
+      } else {
+        setStatus("error")
+        setError(data.message || "Something went wrong.")
+      }
+    } catch {
       setStatus("error")
-      setError(res.error ?? "Something went wrong.")
+      setError("Network error. Please try again.")
     }
   }
 
@@ -37,54 +46,56 @@ export default function ContactPageClient() {
         aria-hidden="true"
       />
       <Navbar />
-      <section className="mx-auto w-[92%] pt-16">
-        <div className="grid gap-10 md:grid-cols-2">
-          <div className="relative overflow-hidden rounded-2xl border border-white/10 bg-white/5 p-6 backdrop-blur">
-            <h1 className="text-3xl font-bold md:text-4xl">Start a Project</h1>
-            <p className="mt-2 text-sm text-white/70">
-              Tell us about your goals. We’ll respond within 1–2 business days.
-            </p>
-            <div className="mt-6 grid gap-3 text-sm">
-              <ContactRow
-                icon={<MessageSquare className="size-4" />}
-                label="WhatsApp"
-                href="https://wa.me/254768094564"
-                value="+254 768094564"
-              />
-              <ContactRow
-                icon={<Mail className="size-4" />}
-                label="Email"
-                href="mailto:hello@falconmetrics.com"
-                value="hello@falconmetrics.com"
-              />
-            </div>
-            <div className="absolute -right-10 -top-10 size-56 rotate-6 bg-gradient-to-br from-emerald-400/15 to-fuchsia-500/15 blur-2xl" />
-          </div>
 
-          <form
-            onSubmit={onSubmit}
-            className="relative overflow-hidden rounded-2xl border border-white/10 bg-white/5 p-6 backdrop-blur"
-          >
-            <div className="grid gap-4">
-              <Field label="Name" name="name" type="text" />
-              <Field label="Email" name="email" type="email" />
-              <Field label="Company" name="company" type="text" />
-              <Field label="Message" name="message" as="textarea" rows={5} />
-              <div className="flex items-center justify-between">
-                {status === "success" && <span className="text-sm text-emerald-400">Thanks! We’ll be in touch.</span>}
-                {status === "error" && <span className="text-sm text-rose-400">{error}</span>}
-                <Button
-                  type="submit"
-                  disabled={status === "loading"}
-                  className="ml-auto bg-gradient-to-r from-emerald-500 to-fuchsia-500 text-black hover:opacity-90"
-                >
-                  {status === "loading" ? "Sending…" : "Send"}
-                </Button>
-              </div>
+      <section className="mx-auto w-[92%] pt-16 max-w-3xl">
+        <h1 className="text-3xl font-bold md:text-4xl mb-4">Start a Project</h1>
+        <p className="text-sm text-white/70 mb-6">
+          Tell us about your goals. We'll respond within 1–2 business days.
+        </p>
+
+        {/* WhatsApp Button (number hidden visually) */}
+        <a
+          href="https://wa.me/254768094564"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="inline-block mb-8 bg-green-500 text-black px-4 py-2 rounded-lg font-medium hover:opacity-90"
+        >
+          Chat on WhatsApp
+          <span className="sr-only">+254 768094564</span>
+        </a>
+
+        <form
+          onSubmit={onSubmit}
+          className="relative overflow-hidden rounded-2xl border border-white/10 bg-white/5 p-6 backdrop-blur"
+        >
+          {/* Hidden inputs for Web3Forms */}
+          <input type="hidden" name="subject" value="New Contact Form Submission" />
+          <input type="hidden" name="from_name" value="Falcon Metrics" />
+
+          <div className="grid gap-4">
+            <Field label="Name" name="name" type="text" />
+            <Field label="Email" name="email" type="email" />
+            <Field label="Company (optional)" name="company" type="text" />
+            <Field label="Phone Number (optional)" name="phone" type="tel" />
+            <Field label="Message" name="message" as="textarea" rows={5} />
+
+            <div className="flex items-center justify-between">
+              {status === "success" && (
+                <span className="text-sm text-emerald-400">Thanks! We'll be in touch.</span>
+              )}
+              {status === "error" && <span className="text-sm text-rose-400">{error}</span>}
+              <Button
+                type="submit"
+                disabled={status === "loading"}
+                className="ml-auto bg-blue-600 text-white hover:bg-blue-700"
+              >
+                {status === "loading" ? "Sending…" : "Send"}
+              </Button>
             </div>
-          </form>
-        </div>
+          </div>
+        </form>
       </section>
+
       <Footer />
     </main>
   )
@@ -114,31 +125,5 @@ function Field({
         <input name={name} type={type} className={base} placeholder={"Enter " + label.toLowerCase()} />
       )}
     </label>
-  )
-}
-
-function ContactRow({
-  icon,
-  label,
-  href,
-  value,
-}: {
-  icon: React.ReactNode
-  label: string
-  href: string
-  value: string
-}) {
-  return (
-    <Link
-      href={href}
-      className="group inline-flex items-center justify-between rounded-lg border border-white/10 bg-black/30 px-3 py-2 text-white/80 transition-colors hover:bg-white/10"
-      target="_blank"
-    >
-      <span className="inline-flex items-center gap-2">
-        <span className="inline-grid size-6 place-items-center rounded-md bg-white/10 text-white">{icon}</span>
-        <span className="text-white">{label}</span>
-      </span>
-      <span className="text-white/70">{value}</span>
-    </Link>
   )
 }

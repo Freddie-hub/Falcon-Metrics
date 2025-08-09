@@ -21,7 +21,6 @@ type Pill = {
 
 const PILLS: Pill[] = [
   { label: "Education", icon: GraduationCap },
-  { label: "Legal", icon: Scale },
   { label: "Manufacturing", icon: Factory },
   { label: "Retail", icon: ShoppingCart },
   { label: "Public Sector", icon: Landmark },

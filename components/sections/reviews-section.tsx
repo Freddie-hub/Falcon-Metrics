@@ -9,7 +9,7 @@ type Review = {
 
 const reviews: Review[] = [
   {
-    quote: "Their modular approach let us pilot quickly and scale with confidence. Measurable ROI within a quarter.",
+    quote: "Their approach let us pilot quickly and scale with confidence. Measurable ROI within a quarter.",
     name: "Maya P.",
     role: "VP Engineering",
     company: "FinServe",
