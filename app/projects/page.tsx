@@ -3,7 +3,7 @@ import Footer from "@/components/footer"
 import Link from "next/link"
 
 export const metadata = {
-  title: "Projects — OmniAI Solutions",
+  title: "Projects — Falcon Labs Solutions",
   description:
     "Selected work across industries showcasing adaptable AI systems: strategy, custom models, automation, and integration.",
 }
@@ -14,50 +14,35 @@ type Project = {
   summary: string
   image: string
   tags: string[]
+  link?: string
 }
 
 const projects: Project[] = [
   {
-    title: "Adaptive Triage Copilot",
-    sector: "Healthcare",
-    summary: "Multimodal triage assistant with clinician-in-the-loop safeguards.",
-    image: "/placeholder.svg?height=400&width=720",
-    tags: ["LLM", "Safety", "On-device"],
+    title: "Venda.ai",
+    sector: "E-commerce",
+    summary:
+      "Connects distributors and buyers using an AI-powered marketplace with intelligent product discovery and pricing recommendations.",
+    image: "https://via.placeholder.com/720x400.png?text=Venda.ai+UI", // replace with actual screenshot URL
+    tags: ["LLM", "Marketplace", "E-commerce"],
+    link: "https://www.vendai.digital",
   },
   {
-    title: "Fraud Detection Mesh",
-    sector: "Finance",
-    summary: "Streaming anomaly detection via graph embeddings and feature store.",
-    image: "/placeholder.svg?height=400&width=720",
-    tags: ["Graph ML", "Streaming", "MLOps"],
+    title: "AgriGuide",
+    sector: "Agriculture",
+    summary:
+      "AI platform for diagnosing plant diseases and pests with actionable recommendations for plant care.",
+    image: "https://via.placeholder.com/720x400.png?text=AgriGuide+UI", // replace accordingly
+    tags: ["React", "Node.js", "Supabase", "PostgreSQL", "OpenAI API"],
+    link: "https://agriguide-sys.vercel.app/",
   },
   {
     title: "Predictive Maintenance Vision",
     sector: "Manufacturing",
-    summary: "Quality inspection and early failure prediction on the edge.",
+    summary:
+      "Quality inspection and early failure prediction on the edge for industrial operations.",
     image: "/placeholder.svg?height=400&width=720",
     tags: ["Vision", "Edge AI", "Pipelines"],
-  },
-  {
-    title: "Retail Recommender Suite",
-    sector: "Retail",
-    summary: "Personalized recommendations and inventory optimization.",
-    image: "/placeholder.svg?height=400&width=720",
-    tags: ["Recommendations", "Demand", "Analytics"],
-  },
-  {
-    title: "Route Optimization Engine",
-    sector: "Logistics",
-    summary: "Dynamic routes with real-time constraints and forecasting.",
-    image: "/placeholder.svg?height=400&width=720",
-    tags: ["Routing", "Forecasting", "Ops"],
-  },
-  {
-    title: "Adaptive Learning Platform",
-    sector: "Education",
-    summary: "AI grading and tailored learning paths at scale.",
-    image: "/placeholder.svg?height=400&width=720",
-    tags: ["EdTech", "LLM", "Personalization"],
   },
 ]
 
@@ -87,8 +72,6 @@ export default function ProjectsPage() {
             <span className="ml-1 inline-block transition-transform group-hover:translate-x-0.5">{"→"}</span>
           </Link>
         </header>
-
-        {/* Smaller parallelogram cards; 3-column desktop */}
         <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
           {projects.map((p) => (
             <ParallelogramCard key={p.title} project={p} />
@@ -104,19 +87,15 @@ function ParallelogramCard({ project }: { project: Project }) {
   return (
     <article className="relative overflow-visible transition-transform duration-300 ease-out hover:-translate-y-0.5">
       <div className="relative -skew-x-6 overflow-hidden rounded-2xl border border-white/10 bg-white/5 shadow-[0_16px_48px_-28px_rgba(0,0,0,0.7)] backdrop-blur-xl">
-        {/* Glow wash */}
         <div className="pointer-events-none absolute -right-24 -top-24 size-72 rotate-6 bg-gradient-to-br from-emerald-500/12 to-fuchsia-500/12 blur-3xl" />
-        {/* Image - reduced height */}
         <div className="relative h-28 w-full overflow-hidden sm:h-32">
           <img
-            src={project.image || "/placeholder.svg"}
+            src={project.image}
             alt={`${project.title} preview`}
             className="h-full w-full object-cover opacity-90"
           />
           <div className="absolute inset-0 bg-gradient-to-t from-neutral-950/70 via-neutral-950/20 to-transparent" />
         </div>
-
-        {/* Content (counter-skew) - tighter paddings */}
         <div className="skew-x-6 p-4">
           <span className="inline-block rounded-full border border-white/15 bg-white/5 px-2.5 py-0.5 text-[10px] uppercase tracking-widest text-white/80">
             {project.sector}
@@ -133,6 +112,16 @@ function ParallelogramCard({ project }: { project: Project }) {
               </li>
             ))}
           </ul>
+          {project.link && (
+            <a
+              href={project.link}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="mt-3 inline-block text-[11px] text-emerald-400 hover:underline"
+            >
+              View in browser →
+            </a>
+          )}
           <div className="mt-3 h-[2px] w-16 bg-gradient-to-r from-emerald-400 to-fuchsia-500" />
         </div>
       </div>

@@ -49,7 +49,8 @@ export default function Navbar({
           </div>
 
           {/* Mobile Navigation Toggle */}
-          <div className="flex items-center md:hidden">
+          <div className="flex items-center gap-2 md:hidden">
+            <ThemeToggle />
             <Button
               variant="ghost"
               size="icon"
@@ -61,66 +62,56 @@ export default function Navbar({
           </div>
         </nav>
 
-        {/* Mobile Slide Menu Overlay */}
+        {/* Mobile Dropdown Menu */}
         {open && (
-          <div 
-            className="fixed inset-0 z-50 bg-black/50 backdrop-blur-sm md:hidden"
-            onClick={() => setOpen(false)}
-          />
-        )}
-
-        {/* Mobile Slide Menu */}
-        <div
-          className={`fixed right-0 top-0 z-50 h-full w-80 max-w-[85vw] transform !bg-sidebar shadow-xl transition-transform duration-300 ease-in-out md:hidden ${
-            open ? 'translate-x-0' : 'translate-x-full'
-          }`}
-          style={{ backgroundColor: 'oklch(0.1 0 0)' }} // true solid fallback
-        >
-          <div className="flex h-full flex-col">
-            {/* Header */}
-            <div className="flex items-center justify-between border-b border-white/10 p-6 bg-sidebar">
-              <span className="text-lg font-semibold text-white">{brand}</span>
-              <Button
-                variant="ghost"
-                size="icon"
+          <div className="mt-3 grid gap-2 rounded-lg border border-white/10 bg-black/40 p-3 text-sm backdrop-blur md:hidden">
+            <Link
+              className="rounded-md px-3 py-2 text-white/90 hover:bg-white/5"
+              href="/"
+              onClick={() => setOpen(false)}
+            >
+              Home
+            </Link>
+            <Link
+              className="rounded-md px-3 py-2 text-white/90 hover:bg-white/5"
+              href="/about"
+              onClick={() => setOpen(false)}
+            >
+              About
+            </Link>
+            <Link
+              className="rounded-md px-3 py-2 text-white/90 hover:bg-white/5"
+              href="/services"
+              onClick={() => setOpen(false)}
+            >
+              Services
+            </Link>
+            <Link
+              className="rounded-md px-3 py-2 text-white/90 hover:bg-white/5"
+              href="/contact"
+              onClick={() => setOpen(false)}
+            >
+              Contact
+            </Link>
+            <div className="flex items-center justify-between gap-3">
+              <Link
+                className="rounded-md px-3 py-2 text-white/70 hover:bg-white/5"
+                href="/login"
                 onClick={() => setOpen(false)}
-                className="text-white/70 hover:text-white"
               >
-                <Menu className="h-6 w-6" />
+                Login
+              </Link>
+              <Button
+                asChild
+                className="bg-gradient-to-r from-emerald-500 to-fuchsia-500 text-black hover:opacity-90"
+              >
+                <Link href="/signup" onClick={() => setOpen(false)}>
+                  Book Demo
+                </Link>
               </Button>
             </div>
-
-            {/* Navigation Links */}
-            <nav className="flex-1 p-6">
-              <div className="space-y-4">
-                <MobileLink href="/" label="Home" setOpen={setOpen} />
-                <MobileLink href="/about" label="About" setOpen={setOpen} />
-                <MobileLink href="/services" label="Services" setOpen={setOpen} />
-                <MobileLink href="/contact" label="Contact" setOpen={setOpen} />
-              </div>
-            </nav>
-
-            {/* Bottom Actions */}
-            <div className="border-t border-white/10 p-6">
-              <div className="space-y-3">
-                <Link 
-                  className="block rounded-lg px-4 py-3 text-center text-white/70 hover:bg-white/5 transition-colors" 
-                  href="/login"
-                  onClick={() => setOpen(false)}
-                >
-                  Book demo
-                </Link>
-                <Button 
-                  asChild 
-                  className="w-full bg-blue-600 text-white hover:bg-blue-700"
-                  onClick={() => setOpen(false)}
-                >
-                  <Link href="/signup">Book demo</Link>
-                </Button>
-              </div>
-            </div>
           </div>
-        </div>
+        )}
       </div>
     </header>
   )
@@ -134,26 +125,6 @@ function NavLink({ href, label }: { href: string; label: string }) {
     >
       <span>{label}</span>
       <span className="absolute -bottom-1 left-0 h-[2px] w-0 bg-gradient-to-r from-emerald-400 to-fuchsia-500 transition-all group-hover:w-full" />
-    </Link>
-  )
-}
-
-function MobileLink({
-  href,
-  label,
-  setOpen
-}: {
-  href: string
-  label: string
-  setOpen: (open: boolean) => void
-}) {
-  return (
-    <Link 
-      className="block rounded-lg px-4 py-3 text-lg text-white/90 hover:bg-white/10 transition-colors" 
-      href={href}
-      onClick={() => setOpen(false)}
-    >
-      {label}
     </Link>
   )
 }
