@@ -42,6 +42,7 @@ export default function Navbar({
             <NavLink href="/" label="Home" />
             <NavLink href="/about" label="About" />
             <NavLink href="/services" label="Services" />
+            <NavLink href="/projects" label="Projects" />
             <NavLink href="/contact" label="Contact" />
             <Button asChild className="bg-blue-600 text-white hover:bg-blue-700">
               <Link href="/contact">Book Demo</Link>
@@ -88,28 +89,18 @@ export default function Navbar({
             </Link>
             <Link
               className="rounded-md px-3 py-2 text-white/90 hover:bg-white/5"
+              href="/projects"
+              onClick={() => setOpen(false)}
+            >
+              Projects
+            </Link>
+            <Link
+              className="rounded-md px-3 py-2 text-white/90 hover:bg-white/5"
               href="/contact"
               onClick={() => setOpen(false)}
             >
               Contact
             </Link>
-            <div className="flex items-center justify-between gap-3">
-              <Link
-                className="rounded-md px-3 py-2 text-white/70 hover:bg-white/5"
-                href="/login"
-                onClick={() => setOpen(false)}
-              >
-                Login
-              </Link>
-              <Button
-                asChild
-                className="bg-gradient-to-r from-emerald-500 to-fuchsia-500 text-black hover:opacity-90"
-              >
-                <Link href="/signup" onClick={() => setOpen(false)}>
-                  Book Demo
-                </Link>
-              </Button>
-            </div>
           </div>
         )}
       </div>

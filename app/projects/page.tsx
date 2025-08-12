@@ -23,7 +23,7 @@ const projects: Project[] = [
     sector: "E-commerce",
     summary:
       "Connects distributors and buyers using an AI-powered marketplace with intelligent product discovery and pricing recommendations.",
-    image: "https://via.placeholder.com/720x400.png?text=Venda.ai+UI", // replace with actual screenshot URL
+    image: "/Vendai.png", // Updated to use local image from public folder
     tags: ["LLM", "Marketplace", "E-commerce"],
     link: "https://www.vendai.digital",
   },
@@ -32,7 +32,7 @@ const projects: Project[] = [
     sector: "Agriculture",
     summary:
       "AI platform for diagnosing plant diseases and pests with actionable recommendations for plant care.",
-    image: "https://via.placeholder.com/720x400.png?text=AgriGuide+UI", // replace accordingly
+    image: "/agriguide.png", // Updated to use local image from public folder
     tags: ["React", "Node.js", "Supabase", "PostgreSQL", "OpenAI API"],
     link: "https://agriguide-sys.vercel.app/",
   },
